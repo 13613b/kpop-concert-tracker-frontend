@@ -4,13 +4,16 @@ This repository contains the Angular frontend of the K-Pop Concert Tracker. The 
 
 ## ⭐️ Features
 
-- Add, view, edit and delete concert entries
-- Display concerts in a monthly calendar
-- Open concert details from the calendar
-- Switch between light mode and dark mode
-- Adjust the font size
-- Responsive layout for desktop and smaller screens
-- Permanent data storage through the connected backend
+- 🗒️ Add concerts with artist, tour, city, country, date, ticket price and personal notes
+- ✔️ View all saved concerts and the total number of entries
+- ✍️ Edit and delete existing concert entries
+- 📆 Display concerts in a monthly calendar
+- 📂 Open concert details directly from the calendar
+- ☀️ Switch between light mode and dark mode
+- 🔍 Increase or decrease the font size
+- 🎶 Open KpopOfficial as an external source for K-Pop information
+- 📱 Responsive layout for desktop and smaller screens
+- 📊 Store concert data permanently through the connected backend
 
 ## 📸 Screenshots
 
