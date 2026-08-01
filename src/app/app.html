@@ -1,0 +1,156 @@
+<div class="app-shell" [class.dark-mode]="isDarkMode" [style.font-size.%]="zoomLevel">
+  <nav class="navbar">
+    <div class="logo">K-Pop Concert Tracker</div>
+
+    <div class="nav-links">
+      <a href="#" (click)="setView('home')">Home</a>
+      <a href="#" (click)="setView('concerts')">My Concerts</a>
+      <a href="#" (click)="setView('calendar')">My Calendar</a>
+      <a href="https://kpopofficial.com" target="_blank">KpopOfficial</a>
+      <a href="#">Help</a>
+
+      <button class="theme-button" (click)="toggleDarkMode()">
+  {{ isDarkMode ? '☀️' : '🌙' }}
+  </button>
+    </div>
+  </nav>
+
+  <div class="page-content">
+    <div class="welcome-section" *ngIf="currentView === 'home'">
+      <h1>Welcome to K-Pop Concert Tracker!</h1>
+      <p>
+        Keep track of your favorite K-Pop concerts, save your memories,
+        organize your concert history and plan future events in one place.
+      </p>
+
+      <button (click)="setView('add')">Add New Concert</button>
+      <button (click)="setView('concerts')">View My Concerts</button>
+    </div>
+
+    <div class="form-section" *ngIf="currentView === 'add'">
+      <h2>Add New Concert</h2>
+
+      <div class="form-grid">
+        <input [(ngModel)]="newConcert.artist" placeholder="Artist">
+        <input [(ngModel)]="newConcert.tourName" placeholder="Tour Name">
+        <input [(ngModel)]="newConcert.city" placeholder="City">
+        <input [(ngModel)]="newConcert.country" placeholder="Country">
+        <input [(ngModel)]="newConcert.date" placeholder="Date">
+        <input [(ngModel)]="newConcert.ticketPrice" placeholder="Ticket Price">
+        <textarea class="experience-input" [(ngModel)]="newConcert.experience" placeholder="My Experience"></textarea>
+      </div>
+
+      <button (click)="addConcert()">Add Concert</button>
+    </div>
+
+    <div class="concerts-section" *ngIf="currentView === 'concerts'">
+      <h1>My Concerts</h1>
+      <p>Number of Concerts: {{ concerts.length }}</p>
+
+      <div class="concert-card" *ngFor="let concert of concerts">
+        <h2>{{ concert.artist }}</h2>
+        <p>{{ concert.city }} - {{ concert.date }}</p>
+        <p>Tour: {{ concert.tourName }}</p>
+        <p>Country: {{ concert.country }}</p>
+        <p>Ticket Price: {{ concert.ticketPrice }}</p>
+        <p>Experience: {{ concert.experience }}</p>
+
+        <button (click)="editConcert(concert)">Edit</button>
+        <button (click)="deleteConcert(concert)">Delete</button>
+      </div>
+    </div>
+
+    <div class="calendar-section" *ngIf="currentView === 'calendar'">
+      <div class="calendar-header">
+        <button (click)="previousMonth()">Previous Month</button>
+        <h1>{{ getCalendarMonthLabel() }}</h1>
+        <button (click)="nextMonth()">Next Month</button>
+      </div>
+
+      <div class="calendar-grid">
+        <div class="calendar-weekday" *ngFor="let day of weekDays">
+          {{ day }}
+        </div>
+
+        <div class="calendar-day" *ngFor="let day of getCalendarDays()">
+          <span *ngIf="day" class="calendar-number">{{ day.getDate() }}</span>
+
+          <button
+            class="calendar-event"
+            *ngFor="let concert of getConcertsForDate(day)"
+            (click)="openCalendarConcert(concert)"
+          >
+            {{ concert.artist }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" *ngIf="editConcertData">
+    <div class="modal">
+      <h2>Edit Concert</h2>
+
+      <input [(ngModel)]="editConcertData.artist" placeholder="Artist">
+      <input [(ngModel)]="editConcertData.tourName" placeholder="Tour">
+      <input [(ngModel)]="editConcertData.city" placeholder="City">
+      <input [(ngModel)]="editConcertData.country" placeholder="Country">
+      <input [(ngModel)]="editConcertData.date" placeholder="Date">
+      <input [(ngModel)]="editConcertData.ticketPrice" placeholder="Ticket Price">
+      <textarea [(ngModel)]="editConcertData.experience" placeholder="My Experience"></textarea>
+
+      <button (click)="updateConcert()">Save</button>
+      <button (click)="cancelEdit()">Cancel</button>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" *ngIf="emptyFormWarning">
+    <div class="modal">
+      <h2>Empty concert</h2>
+      <p>Please fill in at least one field before adding a concert.</p>
+      <button (click)="closeEmptyFormWarning()">OK</button>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" *ngIf="concertSavedMessage">
+    <div class="modal">
+      <h2>Concert saved</h2>
+      <p>Your concert was saved successfully.</p>
+      <button (click)="closeConcertSavedMessage()">OK</button>
+    </div>
+  </div>
+
+    <div class="modal-backdrop" *ngIf="concertToDelete">
+    <div class="modal">
+      <h2>Are you sure?</h2>
+      <p>Are you sure you want to delete {{ concertToDelete.artist }}?</p>
+
+      <button (click)="confirmDelete()">Delete</button>
+      <button (click)="cancelDelete()">Cancel</button>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" *ngIf="selectedCalendarConcert">
+    <div class="modal">
+      <h2>{{ selectedCalendarConcert.artist }}</h2>
+
+      <p>Tour: {{ selectedCalendarConcert.tourName }}</p>
+      <p>City: {{ selectedCalendarConcert.city }}</p>
+      <p>Country: {{ selectedCalendarConcert.country }}</p>
+      <p>Date: {{ selectedCalendarConcert.date }}</p>
+      <p>Ticket Price: {{ selectedCalendarConcert.ticketPrice }}</p>
+      <p>Experience: {{ selectedCalendarConcert.experience }}</p>
+
+      <button (click)="closeCalendarConcert()">Close</button>
+    </div>
+  </div>
+
+  <div class="zoom-controls">
+    <button (click)="decreaseZoom()">A-</button>
+    <button (click)="increaseZoom()">A+</button>
+  </div>
+
+  <footer class="footer">
+    © 2026 Ela-Nur Kuyubasioglu
+  </footer>
+  </div>
