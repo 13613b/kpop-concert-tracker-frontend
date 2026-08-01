@@ -7,7 +7,6 @@
       <a href="#" (click)="setView('concerts')">My Concerts</a>
       <a href="#" (click)="setView('calendar')">My Calendar</a>
       <a href="https://kpopofficial.com" target="_blank">KpopOfficial</a>
-      <a href="#">Help</a>
 
       <button class="theme-button" (click)="toggleDarkMode()">
   {{ isDarkMode ? '☀️' : '🌙' }}
@@ -35,8 +34,11 @@
         <input [(ngModel)]="newConcert.tourName" placeholder="Tour Name">
         <input [(ngModel)]="newConcert.city" placeholder="City">
         <input [(ngModel)]="newConcert.country" placeholder="Country">
-        <input [(ngModel)]="newConcert.date" placeholder="Date">
-        <input [(ngModel)]="newConcert.ticketPrice" placeholder="Ticket Price">
+        <input [(ngModel)]="newConcert.date" type="date" aria-label="Concert date">
+        <div class="price-input">
+          <input [(ngModel)]="newConcert.ticketPrice" type="number" min="0" step="0.01" placeholder="Ticket Price" (keydown)="preventInvalidPriceKeys($event)">
+          <span>€</span>
+        </div>
         <textarea class="experience-input" [(ngModel)]="newConcert.experience" placeholder="My Experience"></textarea>
       </div>
 
@@ -49,10 +51,10 @@
 
       <div class="concert-card" *ngFor="let concert of concerts">
         <h2>{{ concert.artist }}</h2>
-        <p>{{ concert.city }} - {{ concert.date }}</p>
+        <p>{{ concert.city }} - {{ concert.date | date:'dd. MMMM yyyy' }}</p>
         <p>Tour: {{ concert.tourName }}</p>
         <p>Country: {{ concert.country }}</p>
-        <p>Ticket Price: {{ concert.ticketPrice }}</p>
+        <p>Ticket Price: {{ concert.ticketPrice }} €</p>
         <p>Experience: {{ concert.experience }}</p>
 
         <button (click)="editConcert(concert)">Edit</button>
@@ -88,19 +90,24 @@
   </div>
 
   <div class="modal-backdrop" *ngIf="editConcertData">
-    <div class="modal">
+    <div class="modal edit-modal">
       <h2>Edit Concert</h2>
 
       <input [(ngModel)]="editConcertData.artist" placeholder="Artist">
       <input [(ngModel)]="editConcertData.tourName" placeholder="Tour">
       <input [(ngModel)]="editConcertData.city" placeholder="City">
       <input [(ngModel)]="editConcertData.country" placeholder="Country">
-      <input [(ngModel)]="editConcertData.date" placeholder="Date">
-      <input [(ngModel)]="editConcertData.ticketPrice" placeholder="Ticket Price">
-      <textarea [(ngModel)]="editConcertData.experience" placeholder="My Experience"></textarea>
+      <input [(ngModel)]="editConcertData.date" type="date" aria-label="Concert date">
+      <div class="price-input">
+        <input [(ngModel)]="editConcertData.ticketPrice" type="number" min="0" step="0.01" placeholder="Ticket Price" (keydown)="preventInvalidPriceKeys($event)">
+        <span>€</span>
+      </div>
+      <textarea class="edit-experience" [(ngModel)]="editConcertData.experience" placeholder="My Experience"></textarea>
 
-      <button (click)="updateConcert()">Save</button>
-      <button (click)="cancelEdit()">Cancel</button>
+      <div class="modal-actions">
+        <button (click)="updateConcert()">Save</button>
+        <button (click)="cancelEdit()">Cancel</button>
+      </div>
     </div>
   </div>
 
@@ -137,8 +144,8 @@
       <p>Tour: {{ selectedCalendarConcert.tourName }}</p>
       <p>City: {{ selectedCalendarConcert.city }}</p>
       <p>Country: {{ selectedCalendarConcert.country }}</p>
-      <p>Date: {{ selectedCalendarConcert.date }}</p>
-      <p>Ticket Price: {{ selectedCalendarConcert.ticketPrice }}</p>
+      <p>Date: {{ selectedCalendarConcert.date | date:'dd. MMMM yyyy' }}</p>
+      <p>Ticket Price: {{ selectedCalendarConcert.ticketPrice }} €</p>
       <p>Experience: {{ selectedCalendarConcert.experience }}</p>
 
       <button (click)="closeCalendarConcert()">Close</button>

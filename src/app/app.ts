@@ -153,6 +153,12 @@ export class App implements OnInit {
     this.concertToDelete = null;
   }
 
+  preventInvalidPriceKeys(event: KeyboardEvent): void {
+    if (['e', 'E', '+', '-'].includes(event.key)) {
+      event.preventDefault();
+    }
+  }
+
   toggleDarkMode(): void {
     this.isDarkMode = !this.isDarkMode;
   }

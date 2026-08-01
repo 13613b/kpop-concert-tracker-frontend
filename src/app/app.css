@@ -41,9 +41,38 @@ textarea {
   box-sizing: border-box;
 }
 
+input[type="date"] {
+  font-family: inherit;
+  color: #6b7280;
+}
+
+input[type="date"]::-webkit-datetime-edit {
+  font-family: inherit;
+  font-size: 1em;
+}
+
 textarea {
   resize: none;
   min-height: 120px;
+}
+
+.price-input {
+  position: relative;
+}
+
+.price-input input {
+  width: 100%;
+  padding-right: 38px;
+}
+
+.price-input span {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  color: #475569;
+  font-weight: bold;
+  pointer-events: none;
 }
 
 button {
@@ -249,8 +278,34 @@ button:hover {
   background: white;
   padding: 28px;
   border-radius: 10px;
-  width: 420px;
+  width: min(420px, calc(100% - 32px));
+  box-sizing: border-box;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+}
+
+.edit-modal {
+  width: min(620px, calc(100% - 32px));
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.edit-modal h2,
+.edit-experience,
+.modal-actions {
+  grid-column: 1 / -1;
+}
+
+.edit-modal input,
+.edit-modal textarea,
+.edit-modal .price-input {
+  width: 100%;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
 }
 
 .zoom-controls {
@@ -303,6 +358,10 @@ button:hover {
 .dark-mode input::placeholder,
 .dark-mode textarea::placeholder {
   color: #cbd5e1;
+}
+
+.dark-mode .price-input span {
+  color: #f8fafc;
 }
 
 .dark-mode .concert-card,
@@ -372,6 +431,20 @@ button:hover {
   }
 
   .modal {
-    width: calc(100% - 48px);
+    width: calc(100% - 32px);
+  }
+
+  .edit-modal {
+    grid-template-columns: 1fr;
+  }
+
+  .edit-modal h2,
+  .edit-experience,
+  .modal-actions {
+    grid-column: auto;
+  }
+
+  .modal-actions {
+    justify-content: center;
   }
 }
