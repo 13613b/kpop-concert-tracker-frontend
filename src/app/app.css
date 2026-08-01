@@ -274,7 +274,7 @@ button:hover {
   z-index: 10;
 }
 
-.modal {
+.custom-modal {
   background: white;
   padding: 28px;
   border-radius: 10px;
@@ -365,7 +365,7 @@ button:hover {
 }
 
 .dark-mode .concert-card,
-.dark-mode .modal,
+.dark-mode .custom-modal,
 .dark-mode .calendar-grid,
 .dark-mode .calendar-day {
   background: #0f2747;
@@ -430,7 +430,7 @@ button:hover {
     padding: 4px;
   }
 
-  .modal {
+  .custom-modal {
     width: calc(100% - 32px);
   }
 
