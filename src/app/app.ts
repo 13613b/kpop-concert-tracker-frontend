@@ -60,6 +60,7 @@ export class App implements OnInit {
   }
 
   setView(view: string): void {
+    this.currentView = view;
     window.location.hash = view;
   }
 

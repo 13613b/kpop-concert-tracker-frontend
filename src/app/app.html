@@ -3,9 +3,9 @@
     <div class="logo">🎀 K-Pop Concert Tracker</div>
 
     <div class="nav-links">
-      <a href="#home">Home</a>
-      <a href="#concerts">My Concerts</a>
-      <a href="#calendar">My Calendar</a>
+      <a href="#home" (click)="setView('home')">Home</a>
+      <a href="#concerts" (click)="setView('concerts')">My Concerts</a>
+      <a href="#calendar" (click)="setView('calendar')">My Calendar</a>
       <a href="https://kpopofficial.com" target="_blank">KpopOfficial</a>
 
       <button class="theme-button" aria-label="Switch color theme" (click)="toggleDarkMode()">
