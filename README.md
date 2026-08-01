@@ -1,8 +1,8 @@
-# 🎤 K-Pop Concert Tracker – Frontend
+# 🎀 K-Pop Concert Tracker – Frontend
 
 This repository contains the Angular frontend of the K-Pop Concert Tracker. The application allows K-Pop fans to save concert information, organize personal memories and view events in a monthly calendar.
 
-## ✨ Features
+## ⭐️ Features
 
 - Add, view, edit and delete concert entries
 - Display concerts in a monthly calendar
@@ -17,6 +17,8 @@ This repository contains the Angular frontend of the K-Pop Concert Tracker. The 
 Screenshots of the home page, concert form, concert overview and calendar will be added before submission.
 
 ## 🧰 Technologies
+
+### 🎨 Frontend
 
 - Angular 22
 - TypeScript
@@ -49,7 +51,7 @@ npm start
 
 Open `http://localhost:4200` in a browser.
 
-## 💻 Usage
+## 📖 Usage
 
 ### Add a concert
 
@@ -85,6 +87,6 @@ The frontend communicates with the REST API at `http://localhost:3000/api/concer
 
 All suggested code was reviewed and tested as part of the project.
 
-## 👩‍💻 Author
+## 👤 Author
 
 Ela-Nur Kuyubasioglu, 2026
