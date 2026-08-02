@@ -17,7 +17,37 @@ This repository contains the Angular frontend of the K-Pop Concert Tracker. The 
 
 ## 📸 Screenshots
 
-Screenshots of the home page, concert form, concert overview and calendar will be added before submission.
+### 🏠 Home page
+
+![Home page](frontend/frontend-app/screenshots/home-desktop.png)
+
+### 📝 Add a concert
+
+![Add a concert](frontend/frontend-app/screenshots/add-concert.png)
+
+### 📋 View saved concerts
+
+![My concerts](frontend/frontend-app/screenshots/my-concerts.png)
+
+### ✍️ Edit a concert
+
+![Edit a concert](frontend/frontend-app/screenshots/edit-concert.png)
+
+### 🗑️ Delete a concert
+
+![Delete confirmation](frontend/frontend-app/screenshots/delete-confirmation.png)
+
+### 📅 Calendar
+
+![Calendar](frontend/frontend-app/screenshots/calendar.png)
+
+### 📂 View concert details in the calendar
+
+![Calendar details](frontend/frontend-app/screenshots/calendar-details.png)
+
+### 📱 Responsive mobile view
+
+![Responsive mobile view](frontend/frontend-app/screenshots/home-mobile.png)
 
 ## 🧰 Technologies
 
