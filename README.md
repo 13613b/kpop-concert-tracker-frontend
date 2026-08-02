@@ -118,8 +118,6 @@ The frontend communicates with the REST API at `http://localhost:3000/api/concer
 
 - **ChatGPT / Codex:** Used for explanations, debugging support, responsive layout improvements, Bootstrap integration and documentation.
 
-All suggested code was reviewed and tested as part of the project.
-
 ## 👤 Author
 
 Ela-Nur Kuyubasioglu, 2026
